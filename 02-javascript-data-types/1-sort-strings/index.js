@@ -1,7 +1,3 @@
-function copySorted(arr) {
-  return arr.slice().sort((a, b) => a.localeCompare(b, undefined, {caseFirst: 'upper'}));
-}
-
 /**
  * sortStrings - sorts array of string by two criteria "asc" or "desc"
  * @param {string[]} arr - the array of strings
@@ -9,5 +5,6 @@ function copySorted(arr) {
  * @returns {string[]}
  */
 export function sortStrings(arr, param = 'asc') {
-  return param === 'asc' ? copySorted(arr) : copySorted(arr).reverse();
+  const defaultComparator = (a, b) => a.localeCompare(b, ['ru', 'en'], {caseFirst: 'upper'});
+  return param === 'asc' ? [...arr].sort(defaultComparator) : [...arr].sort((a, b) => defaultComparator(b, a));
 }
