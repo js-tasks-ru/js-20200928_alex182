@@ -4,10 +4,10 @@
  * @param {...string} fields - the properties paths to pick
  * @returns {object} - returns the new object
  */
-export const pick = (obj, ...fields) => {
-  //es2017
-  // return Object.fromEntries(Object.entries(obj).filter(([key]) => fields.includes(key)));
-  const resObj = {};
-  Object.entries(obj).filter(([key]) => fields.includes(key)).forEach(([key, value]) => resObj[key] = value);
-  return resObj;
-};
+export const pick = (obj, ...fields) =>
+  Object.entries(obj)
+    .filter(([k]) => fields.includes(k))
+    .reduce((acc, [k, v]) => ({...acc, [k]: v}), {});
+
+//es2017 SECOND SOLUTION
+// return Object.fromEntries(Object.entries(obj).filter(([key]) => fields.includes(key)));
