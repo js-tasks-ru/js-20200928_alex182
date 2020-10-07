@@ -5,5 +5,9 @@
  * @returns {string} - the new string without extra symbols according passed size
  */
 export function trimSymbols(string, size) {
-
+  if (size === 0) {
+    return "";
+  }
+  const regex = new RegExp(`((.)\\${size}{1})\\${size}+`, "gm");
+  return string.replace(regex, "$1");
 }
