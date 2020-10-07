@@ -8,6 +8,7 @@ export function trimSymbols(string, size) {
   if (size === 0) {
     return "";
   }
-  const regex = new RegExp(`((.)\\${size}{1})\\${size}+`, "gm");
-  return string.replace(regex, "$1");
+  const regex = new RegExp(`(.)\\1{${size},}`, "gm");
+  const occurenced = string.match(regex);
+  return !occurenced ? string : occurenced.reduce((acc, curr) => acc.replace(curr, curr.substring(0, size)), string);
 }
