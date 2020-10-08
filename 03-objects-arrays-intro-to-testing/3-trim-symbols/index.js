@@ -5,13 +5,14 @@
  * @returns {string} - the new string without extra symbols according passed size
  */
 export function trimSymbols(string, size) {
-  const regex = new RegExp(`(.)\\1{${size},}`, "gm");
-  let lastInd = 0;
-  let match;
-  let res = "";
-  while (match = regex.exec(string)) {
-    res += string.substring(lastInd, match.index + size);
-    lastInd = regex.lastIndex;
+  if(!string) return '';
+  const arr = [{char: string[0], count: 0}];
+  for (let char of string) {
+    if (arr[arr.length - 1].char !== char) {
+      arr.push({char, count: 1});
+    } else {
+      arr[arr.length - 1].count++;
+    }
   }
-  return res + string.substring(lastInd);
+  return arr.reduce((acc, {char, count}) => (acc += count > size ? char.repeat(size) : char.repeat(count)), "");
 }
