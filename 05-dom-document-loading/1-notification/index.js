@@ -9,7 +9,7 @@ export default class NotificationMessage {
     if (NotificationMessage.activeElement) {
       NotificationMessage.activeElement.remove();
     }
-    this.createElement();
+    this.initElement();
   }
 
   get template() {
@@ -24,7 +24,7 @@ export default class NotificationMessage {
 `;
   }
 
-  createElement() {
+  initElement() {
     const createdElement = document.createElement('div');
     createdElement.innerHTML = this.template;
     this.element = createdElement.firstElementChild;

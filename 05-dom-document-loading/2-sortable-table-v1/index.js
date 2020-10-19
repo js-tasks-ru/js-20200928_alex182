@@ -6,14 +6,14 @@ export default class SortableTable {
   constructor(header = [], {data = []} = {}) {
     this.header = [...header];
     this.data = data;
-    this.createElement();
-    this.subElements = this.getSubElements();
+    this.initElements();
   }
 
-  createElement() {
+  initElements() {
     const createdElement = document.createElement('div');
     createdElement.innerHTML = this.template;
     this.element = createdElement.firstElementChild;
+    this.subElements = this.getSubElements();
   }
 
   get template() {
