@@ -59,7 +59,7 @@ export default class SortableTable {
     return headers.map(({id, template}) => template ? template(row[id]) : `<div class="sortable-table__cell">${row[id]}</div>`).join('');
   }
 
-  sort(fieldValue, fieldOrder = 'asc') {
+  sort(fieldValue, fieldOrder) {
     const direction = fieldOrder === 'asc' ? 1 : -1;
     const arr = [...this.data];
     this.removeArrow();
